@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Registration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 450px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px gray;
+      text-align: left;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      background: blue;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 15px;
+      font-size: 16px;
+      border-radius: 5px;
+    }
+
+    #userDetails {
+      margin-top: 20px;
+      display: none;
+      background: #e0f7fa;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px gray;
+    }
+
+    .detail-box {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>User Registration</h2>
+
+  <div class="container">
+    <form id="registrationForm">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" placeholder="Enter First Name" required><br>
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" placeholder="Enter Last Name" required><br>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter Email" required><br>
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" placeholder="Enter Address" required><br>
+
+      <label for="fathersName">Father's Name:</label>
+      <input type="text" id="fathersName" placeholder="Enter Father's Name" required><br>
+
+      <label for="mothersName">Mother's Name:</label>
+      <input type="text" id="mothersName" placeholder="Enter Mother's Name" required><br>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <div class="container">
+    <a href="list.html" style="color: blue;">View Registered Users</a>
+  </div>
+
+  <script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const user = {
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value,
+        fathersName: document.getElementById("fathersName").value,
+        mothersName: document.getElementById("mothersName").value
+      };
+
+      // Store user data in localStorage
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      users.push(user);
+      localStorage.setItem("users", JSON.stringify(users));
+
+      // Make POST request to server (Assuming you have a server running)
+      fetch("/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      }).then(response => {
+        if (response.ok) {
+          console.log("User registered successfully.");
+        }
+      });
+
+      alert("Registered successfully!");
+
+      // Clear form fields
+      document.getElementById("registrationForm").reset();
+    });
+  </script>
+</body>
+</html>

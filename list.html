@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registered Users</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .user-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .user-card {
+      background: #e0f7fa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      text-align: left;
+    }
+
+    .user-card strong {
+      color: #00796b;
+    }
+
+    .user-card p {
+      margin: 5px 0;
+    }
+
+    a {
+      color: blue;
+      text-decoration: none;
+      font-size: 16px;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h2>Registered Users</h2>
+  <div class="user-container" id="userList"></div>
+  <a href="index.html">Register New User</a>
+
+  <script>
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const list = document.getElementById("userList");
+
+    if (users.length > 0) {
+      users.forEach(user => {
+        const userCard = document.createElement("div");
+        userCard.classList.add("user-card");
+
+        userCard.innerHTML = `
+          <strong>Name:</strong>
+          <p>${user.firstName} ${user.lastName}</p>
+          <strong>Email:</strong>
+          <p>${user.email}</p>
+          <strong>Address:</strong>
+          <p>${user.address}</p>
+          <strong>Father's Name:</strong>
+          <p>${user.fathersName}</p>
+          <strong>Mother's Name:</strong>
+          <p>${user.mothersName}</p>
+        `;
+
+        list.appendChild(userCard);
+      });
+    } else {
+      list.innerHTML = '<p>No users registered yet.</p>';
+    }
+  </script>
+</body>
+</html>
