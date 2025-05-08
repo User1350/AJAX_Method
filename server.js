@@ -19,3 +19,11 @@ app.post("/register", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+
+if not installed the packages
+config.vm.network "forwarded_port", guest: 3000, host: 3000
+
+vagrant reload
+
+npm install express
