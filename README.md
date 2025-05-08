@@ -1,9 +1,11 @@
-vagrant --version
+vagrant --version (Optional)
 
-vagrant up 
+vagrant up (Start VM)
 
-sudo apt update
+vagrant ssh (Login to VM)
 
-sudo apt install nodejs npm
+sudo apt update (Update package lists)
 
-node server.js
+sudo apt install nodejs npm (Install Node.js and npm)
+
+node server.js (Run your Node.js app)
